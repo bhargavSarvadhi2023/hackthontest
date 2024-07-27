@@ -1,10 +1,24 @@
 import express from "express";
-import { listTenders, getTenderDetails } from "../controllers/tenderController";
-import { authenticateUser } from "../middleware/auth";
+import {
+  listTenders,
+  getTenderDetails,
+  getuserDetails,
+} from "../controllers/tenderController";
+import authenticate from "../middleware/auth";
 
 const router = express.Router();
 
-router.get("/", authenticateUser, listTenders);
-router.get("/:id", authenticateUser, getTenderDetails);
+router.get(
+  "/",
+  authenticate.authenticateUser,
+  authenticate.authorizeRoles("user", "admin"),
+  listTenders
+);
+router.get(
+  "/:id",
+  authenticate.authenticateUser,
+  authenticate.authorizeRoles("user", "admin"),
+  getTenderDetails
+);
 
 export default router;

@@ -4,6 +4,7 @@ import tenderRoutes from "./routes/tender";
 import bidRoutes from "./routes/bid";
 import adminRoutes from "./routes/admin";
 import sequelize from "./config/database";
+import cors from "cors";
 
 const app = express();
 
